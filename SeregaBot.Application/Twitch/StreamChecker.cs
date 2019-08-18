@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,8 +43,17 @@ namespace SeregaBot.Application.Twitch
 
             while (true)
             {
-                LiveStreams liveStreams = await _twitch.V5.Streams.GetLiveStreamsAsync(streamerIds);
-
+                LiveStreams liveStreams = null;
+                try
+                { 
+                    liveStreams = await _twitch.V5.Streams.GetLiveStreamsAsync(streamerIds);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    continue;
+                }
+                
                 var liveStreamsIds = liveStreams.Streams.Select(s => s.Channel.Id);
                 foreach (string channelId in _streamers.Values)
                 {

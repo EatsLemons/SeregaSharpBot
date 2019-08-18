@@ -33,6 +33,9 @@ namespace SeregaBot.Application.Discord
 
         public async Task SendNotifyAsync(string rolename, string message)
         {
+            if (string.IsNullOrEmpty(rolename)) throw new ArgumentException("rolename");
+            if (string.IsNullOrEmpty(message)) throw new ArgumentException("message");
+            
             if (_channel == null)
                 await Task.Delay(10_000);
 
