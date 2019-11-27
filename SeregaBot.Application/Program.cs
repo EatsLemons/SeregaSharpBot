@@ -31,7 +31,8 @@ namespace SeregaBot.Application
                 await foreach (string streamer in streamChecker.WaitForStreamerOnline())
                 {
                     Console.WriteLine($"{DateTime.Now} streamer {streamer} online");
-                    await dsc.SendNotifyAsync(streamer, $"Запустил свой стрим");
+                    await dsc.SendNotifyAsync(streamer, 
+                        $"Запустил свой стрим https://www.twitch.tv/{streamer}");
                 }
             }
             catch (Exception e)
